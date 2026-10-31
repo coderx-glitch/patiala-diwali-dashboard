@@ -1,0 +1,93 @@
+{
+ "station": "Model Town, Patiala - PPCB (CPCB CAAQMS station site_1437)",
+ "generated_at_ist": "2026-11-01T00:57:04+05:30",
+ "generated_for": "Diwali 2026 (Nov 8)",
+ "forecast_issue": "Open-Meteo live 16-day weather forecast pulled at generated_at_ist",
+ "train_cutoff": "model refit on complete daily rows 2021-01-01 to 2024-12-31 (station history runs to 2025-09-01, but 2025 rows lack complete covariates in the open dataset and are excluded) for forward prediction only",
+ "target": "daily mean PM2.5 concentration (ug/m3); cpcb_pm25_band uses official CPCB PM2.5 breakpoint bands, band label only, no numeric AQI code",
+ "predictions": [
+  {
+   "date": "2026-11-01",
+   "pm25_pred": 92.2,
+   "days_to_diwali": 7,
+   "cpcb_pm25_band": "Poor"
+  },
+  {
+   "date": "2026-11-02",
+   "pm25_pred": 93.1,
+   "days_to_diwali": 6,
+   "cpcb_pm25_band": "Poor"
+  },
+  {
+   "date": "2026-11-03",
+   "pm25_pred": 86.1,
+   "days_to_diwali": 5,
+   "cpcb_pm25_band": "Moderate"
+  },
+  {
+   "date": "2026-11-04",
+   "pm25_pred": 95.4,
+   "days_to_diwali": 4,
+   "cpcb_pm25_band": "Poor"
+  },
+  {
+   "date": "2026-11-05",
+   "pm25_pred": 99.2,
+   "days_to_diwali": 3,
+   "cpcb_pm25_band": "Poor"
+  },
+  {
+   "date": "2026-11-06",
+   "pm25_pred": 96.3,
+   "days_to_diwali": 2,
+   "cpcb_pm25_band": "Poor"
+  },
+  {
+   "date": "2026-11-07",
+   "pm25_pred": 119.0,
+   "days_to_diwali": 1,
+   "cpcb_pm25_band": "Poor"
+  },
+  {
+   "date": "2026-11-08",
+   "pm25_pred": 119.8,
+   "days_to_diwali": 0,
+   "cpcb_pm25_band": "Poor"
+  },
+  {
+   "date": "2026-11-09",
+   "pm25_pred": 131.6,
+   "days_to_diwali": -1,
+   "cpcb_pm25_band": "Very Poor"
+  },
+  {
+   "date": "2026-11-10",
+   "pm25_pred": 143.9,
+   "days_to_diwali": -2,
+   "cpcb_pm25_band": "Very Poor"
+  },
+  {
+   "date": "2026-11-11",
+   "pm25_pred": 132.3,
+   "days_to_diwali": -3,
+   "cpcb_pm25_band": "Very Poor"
+  },
+  {
+   "date": "2026-11-12",
+   "pm25_pred": 127.8,
+   "days_to_diwali": -4,
+   "cpcb_pm25_band": "Very Poor"
+  },
+  {
+   "date": "2026-11-13",
+   "pm25_pred": 116.1,
+   "days_to_diwali": -5,
+   "cpcb_pm25_band": "Poor"
+  }
+ ],
+ "sources": [
+  "https://airquality.xkdr.org/ (CPCB CAAQMS compilation, CC-BY 4.0)",
+  "https://open-meteo.com/en/docs",
+  "https://airquality.cpcb.gov.in/ccr_docs/How_AQI_Calculated.pdf"
+ ]
+}

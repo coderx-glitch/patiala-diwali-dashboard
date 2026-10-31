@@ -1,0 +1,182 @@
+{
+ "station": "Model Town, Patiala - PPCB (CPCB CAAQMS station site_1437)",
+ "generated_at_ist": "2026-10-31T23:12:13+05:30",
+ "target": "daily mean PM2.5 concentration (ug/m3)",
+ "train_cutoff": "training rows end 2024-10-19; test window starts 2024-10-20 (no overlap, asserted in code)",
+ "test_window": "2024-10-20 to 2024-11-10 (held out from training)",
+ "series_model": "Retrospective reconstruction (archived near-analysis weather inputs) - chart series is this model, NOT the lead-matched rows",
+ "fit": {
+  "train_daily_rows": 1388,
+  "train_span": "2021-01-01 to 2024-10-19",
+  "test_days": 22,
+  "note": "rows with any missing pollutant or weather value were dropped; PM10/NO2 gaps reduce the sample though only PM2.5 is the target"
+ },
+ "models": [
+  {
+   "name": "Retrospective reconstruction (archived near-analysis weather inputs)",
+   "mae": 17.2,
+   "mae_diwali_core": 12.0
+  },
+  {
+   "name": "Lead-matched, weather forecast issued 1 day ahead (Previous Runs API)",
+   "mae": 17.5,
+   "mae_diwali_core": 7.0
+  },
+  {
+   "name": "Lead-matched, weather forecast issued 3 days ahead (Previous Runs API)",
+   "mae": 19.7,
+   "mae_diwali_core": 9.4
+  },
+  {
+   "name": "Naive climatology baseline (same-calendar-date historical mean)",
+   "mae": 20.2
+  }
+ ],
+ "series": [
+  {
+   "date": "2024-10-20",
+   "actual": 64.4,
+   "predicted": 69.3,
+   "naive": 56.0
+  },
+  {
+   "date": "2024-10-21",
+   "actual": 71.3,
+   "predicted": 70.2,
+   "naive": 62.1
+  },
+  {
+   "date": "2024-10-22",
+   "actual": 92.2,
+   "predicted": 66.7,
+   "naive": 58.0
+  },
+  {
+   "date": "2024-10-23",
+   "actual": 73.0,
+   "predicted": 73.0,
+   "naive": 69.9
+  },
+  {
+   "date": "2024-10-24",
+   "actual": 57.1,
+   "predicted": 66.2,
+   "naive": 56.1
+  },
+  {
+   "date": "2024-10-25",
+   "actual": 68.8,
+   "predicted": 74.3,
+   "naive": 61.7
+  },
+  {
+   "date": "2024-10-26",
+   "actual": 59.7,
+   "predicted": 84.8,
+   "naive": 59.8
+  },
+  {
+   "date": "2024-10-27",
+   "actual": 90.0,
+   "predicted": 62.8,
+   "naive": 71.1
+  },
+  {
+   "date": "2024-10-28",
+   "actual": 78.6,
+   "predicted": 70.8,
+   "naive": 75.4
+  },
+  {
+   "date": "2024-10-29",
+   "actual": 66.0,
+   "predicted": 90.3,
+   "naive": 81.3
+  },
+  {
+   "date": "2024-10-30",
+   "actual": 102.3,
+   "predicted": 115.9,
+   "naive": 80.4
+  },
+  {
+   "date": "2024-10-31",
+   "actual": 114.0,
+   "predicted": 108.9,
+   "naive": 106.4
+  },
+  {
+   "date": "2024-11-01",
+   "actual": 121.6,
+   "predicted": 107.3,
+   "naive": 108.0
+  },
+  {
+   "date": "2024-11-02",
+   "actual": 107.2,
+   "predicted": 114.6,
+   "naive": 90.9
+  },
+  {
+   "date": "2024-11-03",
+   "actual": 93.3,
+   "predicted": 104.5,
+   "naive": 96.3
+  },
+  {
+   "date": "2024-11-04",
+   "actual": 99.8,
+   "predicted": 135.8,
+   "naive": 102.5
+  },
+  {
+   "date": "2024-11-05",
+   "actual": 81.5,
+   "predicted": 86.4,
+   "naive": 113.3
+  },
+  {
+   "date": "2024-11-06",
+   "actual": 99.5,
+   "predicted": 108.8,
+   "naive": 93.4
+  },
+  {
+   "date": "2024-11-07",
+   "actual": 72.4,
+   "predicted": 117.4,
+   "naive": 116.4
+  },
+  {
+   "date": "2024-11-08",
+   "actual": 72.3,
+   "predicted": 132.5,
+   "naive": 143.0
+  },
+  {
+   "date": "2024-11-09",
+   "actual": 81.9,
+   "predicted": 115.0,
+   "naive": 169.2
+  },
+  {
+   "date": "2024-11-10",
+   "actual": 89.3,
+   "predicted": 96.3,
+   "naive": 127.3
+  }
+ ],
+ "method": "LightGBM trained 2021-01-01 to 2024-10-19 on daily PM2.5 with calendar + days-to-Diwali + weather features, no pollution lags. Skill estimated by feeding archived weather forecasts issued 1 and 3 days before each test date (Open-Meteo Previous Runs API).",
+ "caveats": [
+  "Single monitoring station - results are station-level, not neighbourhood-exact.",
+  "Values are PM2.5 concentrations (ug/m3) with official CPCB PM2.5 band labels; not a full National AQI (needs 3+ pollutants and official averaging rules).",
+  "This artifact covers the 2024 held-out window; the same evaluation was run on two more held-out Diwali windows (2022, 2023) and a 7-day lead test, shown under Model & Method. Errors on past windows are not proof of general forecast skill.",
+  "Daily values average whatever hourly readings exist that day (no minimum hourly coverage threshold)."
+ ],
+ "sources": [
+  "https://airquality.xkdr.org/ (CPCB CAAQMS compilation, CC-BY 4.0)",
+  "https://open-meteo.com/en/docs/historical-forecast-api",
+  "https://open-meteo.com/en/docs/previous-runs-api",
+  "https://airquality.cpcb.gov.in/ccr_docs/How_AQI_Calculated.pdf"
+ ]
+}

@@ -1,0 +1,14 @@
+{
+ "methodology": "Output is daily mean PM2.5 concentration (ug/m3) for the Model Town, Patiala CPCB government monitor, with official CPCB PM2.5 band labels (Good/Satisfactory/Moderate/Poor/Very Poor/Severe) - band labels only, not a full National AQI. Model: LightGBM trained on 38,150 hourly PM2.5 readings (2021-Sep 2025) aggregated daily; the refit uses the 1,461 daily rows with complete features (2021-01-01 to 2024-12-31), using weather (Open-Meteo), calendar and explicit days-to-Diwali features. Skill measured on a held-out Diwali 2024 window the model never trained on, in two ways: a retrospective reconstruction with archived near-analysis weather, and lead-matched runs fed with forecasts actually issued 1 and 3 days before each date (Open-Meteo Previous Runs API). Diwali 2026 = Nov 8; predictions generated from the live 16-day weather forecast.",
+ "limitations": [
+  "One CPCB station in Patiala - predictions are station-level (Model Town), not neighbourhood-exact.",
+  "PM2.5 concentration with band labels; full National AQI needs min. 3 pollutants (one necessarily PM2.5/PM10) and 16+ hours of data, per official CPCB rules.",
+  "Station data in the open dataset ends Sep 2025; the refit uses complete daily rows through 2024-12-31. Live comparison during Diwali week depends on the station still reporting."
+ ],
+ "sources": [
+  "https://airquality.xkdr.org/ - CPCB CAAQMS via XKDR Forum India Air Quality Database (CC-BY 4.0)",
+  "https://open-meteo.com/en/docs/historical-forecast-api - archived weather forecasts (CC-BY 4.0)",
+  "https://open-meteo.com/en/docs/previous-runs-api - fixed lead-time archived forecasts",
+  "https://airquality.cpcb.gov.in/ccr_docs/How_AQI_Calculated.pdf - official CPCB AQI breakpoints"
+ ]
+}

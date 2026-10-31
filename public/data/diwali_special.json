@@ -1,0 +1,830 @@
+{
+ "station": "Model Town, Patiala - PPCB (CPCB CAAQMS station site_1437)",
+ "generated_at_ist": "2026-11-01T03:32:16+05:30",
+ "generated_by": "scripts/derive_diwali_special.py from repo artifacts + hourly data pack only",
+ "diwali_dates_used": {
+  "2021": "2021-11-04",
+  "2022": "2022-10-24",
+  "2023": "2023-11-12",
+  "2024": "2024-10-31",
+  "2025": "2025-10-20",
+  "2026": "2026-11-08"
+ },
+ "festivals_2026": [
+  {
+   "date": "2026-11-06",
+   "rel_day": -2,
+   "name": "Dhanteras"
+  },
+  {
+   "date": "2026-11-07",
+   "rel_day": -1,
+   "name": "Chhoti Diwali"
+  },
+  {
+   "date": "2026-11-08",
+   "rel_day": 0,
+   "name": "Diwali"
+  },
+  {
+   "date": "2026-11-11",
+   "rel_day": 3,
+   "name": "Bhai Dooj"
+  }
+ ],
+ "journey_2026": [
+  {
+   "date": "2026-11-01",
+   "weekday": "Sunday",
+   "rel_day": -7,
+   "pm25": 92.2,
+   "band": "Poor",
+   "festival": null
+  },
+  {
+   "date": "2026-11-02",
+   "weekday": "Monday",
+   "rel_day": -6,
+   "pm25": 93.1,
+   "band": "Poor",
+   "festival": null
+  },
+  {
+   "date": "2026-11-03",
+   "weekday": "Tuesday",
+   "rel_day": -5,
+   "pm25": 86.1,
+   "band": "Moderate",
+   "festival": null
+  },
+  {
+   "date": "2026-11-04",
+   "weekday": "Wednesday",
+   "rel_day": -4,
+   "pm25": 95.4,
+   "band": "Poor",
+   "festival": null
+  },
+  {
+   "date": "2026-11-05",
+   "weekday": "Thursday",
+   "rel_day": -3,
+   "pm25": 99.2,
+   "band": "Poor",
+   "festival": null
+  },
+  {
+   "date": "2026-11-06",
+   "weekday": "Friday",
+   "rel_day": -2,
+   "pm25": 96.3,
+   "band": "Poor",
+   "festival": "Dhanteras"
+  },
+  {
+   "date": "2026-11-07",
+   "weekday": "Saturday",
+   "rel_day": -1,
+   "pm25": 119.0,
+   "band": "Poor",
+   "festival": "Chhoti Diwali"
+  },
+  {
+   "date": "2026-11-08",
+   "weekday": "Sunday",
+   "rel_day": 0,
+   "pm25": 119.8,
+   "band": "Poor",
+   "festival": "Diwali"
+  },
+  {
+   "date": "2026-11-09",
+   "weekday": "Monday",
+   "rel_day": 1,
+   "pm25": 131.6,
+   "band": "Very Poor",
+   "festival": null
+  },
+  {
+   "date": "2026-11-10",
+   "weekday": "Tuesday",
+   "rel_day": 2,
+   "pm25": 143.9,
+   "band": "Very Poor",
+   "festival": null
+  },
+  {
+   "date": "2026-11-11",
+   "weekday": "Wednesday",
+   "rel_day": 3,
+   "pm25": 132.3,
+   "band": "Very Poor",
+   "festival": "Bhai Dooj"
+  },
+  {
+   "date": "2026-11-12",
+   "weekday": "Thursday",
+   "rel_day": 4,
+   "pm25": 127.8,
+   "band": "Very Poor",
+   "festival": null
+  },
+  {
+   "date": "2026-11-13",
+   "weekday": "Friday",
+   "rel_day": 5,
+   "pm25": 116.1,
+   "band": "Poor",
+   "festival": null
+  }
+ ],
+ "comparison": {
+  "rel_window": [
+   -7,
+   5
+  ],
+  "rel_day_meaning": "0 = Diwali day, negative = days before, positive = days after",
+  "years": [
+   {
+    "year": 2021,
+    "kind": "station_actual",
+    "label": "2021 actual - Model Town station (CPCB)",
+    "note": "Measured station daily mean PM2.5 (IST calendar days, hourly archive).",
+    "points": [
+     {
+      "rel_day": -7,
+      "pm25": 66.9,
+      "n_hours": 24
+     },
+     {
+      "rel_day": -6,
+      "pm25": 64.5,
+      "n_hours": 24
+     },
+     {
+      "rel_day": -5,
+      "pm25": 70.7,
+      "n_hours": 24
+     },
+     {
+      "rel_day": -4,
+      "pm25": 113.2,
+      "n_hours": 24
+     },
+     {
+      "rel_day": -3,
+      "pm25": 108.3,
+      "n_hours": 24
+     },
+     {
+      "rel_day": -2,
+      "pm25": 62.4,
+      "n_hours": 24
+     },
+     {
+      "rel_day": -1,
+      "pm25": 68.6,
+      "n_hours": 24
+     },
+     {
+      "rel_day": 0,
+      "pm25": 101.5,
+      "n_hours": 24
+     },
+     {
+      "rel_day": 1,
+      "pm25": 153.4,
+      "n_hours": 24
+     },
+     {
+      "rel_day": 2,
+      "pm25": 108.5,
+      "n_hours": 24
+     },
+     {
+      "rel_day": 3,
+      "pm25": 150.2,
+      "n_hours": 24
+     },
+     {
+      "rel_day": 4,
+      "pm25": 177.4,
+      "n_hours": 20
+     },
+     {
+      "rel_day": 5,
+      "pm25": 157.9,
+      "n_hours": 24
+     }
+    ]
+   },
+   {
+    "year": 2022,
+    "kind": "station_actual",
+    "label": "2022 actual - Model Town station (CPCB)",
+    "note": "Measured station daily mean PM2.5 (IST calendar days, hourly archive).",
+    "points": [
+     {
+      "rel_day": -7,
+      "pm25": 60.2,
+      "n_hours": 22
+     },
+     {
+      "rel_day": -6,
+      "pm25": 67.8,
+      "n_hours": 24
+     },
+     {
+      "rel_day": -5,
+      "pm25": 76.3,
+      "n_hours": 24
+     },
+     {
+      "rel_day": -4,
+      "pm25": 66.4,
+      "n_hours": 24
+     },
+     {
+      "rel_day": -3,
+      "pm25": 54.2,
+      "n_hours": 24
+     },
+     {
+      "rel_day": -2,
+      "pm25": 44.6,
+      "n_hours": 24
+     },
+     {
+      "rel_day": -1,
+      "pm25": 62.1,
+      "n_hours": 24
+     },
+     {
+      "rel_day": 0,
+      "pm25": 86.4,
+      "n_hours": 24
+     },
+     {
+      "rel_day": 1,
+      "pm25": 97.7,
+      "n_hours": 24
+     },
+     {
+      "rel_day": 2,
+      "pm25": 89.1,
+      "n_hours": 23
+     },
+     {
+      "rel_day": 3,
+      "pm25": 81.7,
+      "n_hours": 24
+     },
+     {
+      "rel_day": 4,
+      "pm25": 88.0,
+      "n_hours": 24
+     },
+     {
+      "rel_day": 5,
+      "pm25": 92.7,
+      "n_hours": 24
+     }
+    ]
+   },
+   {
+    "year": 2023,
+    "kind": "station_actual",
+    "label": "2023 actual - Model Town station (CPCB)",
+    "note": "Measured station daily mean PM2.5 (IST calendar days, hourly archive).",
+    "points": [
+     {
+      "rel_day": -7,
+      "pm25": 110.4,
+      "n_hours": 24
+     },
+     {
+      "rel_day": -6,
+      "pm25": 106.0,
+      "n_hours": 24
+     },
+     {
+      "rel_day": -5,
+      "pm25": 108.0,
+      "n_hours": 24
+     },
+     {
+      "rel_day": -4,
+      "pm25": 119.1,
+      "n_hours": 23
+     },
+     {
+      "rel_day": -3,
+      "pm25": 143.7,
+      "n_hours": 24
+     },
+     {
+      "rel_day": -2,
+      "pm25": 118.9,
+      "n_hours": 24
+     },
+     {
+      "rel_day": -1,
+      "pm25": 27.2,
+      "n_hours": 24
+     },
+     {
+      "rel_day": 0,
+      "pm25": 83.0,
+      "n_hours": 24
+     },
+     {
+      "rel_day": 1,
+      "pm25": 153.9,
+      "n_hours": 24
+     },
+     {
+      "rel_day": 2,
+      "pm25": 120.7,
+      "n_hours": 24
+     },
+     {
+      "rel_day": 3,
+      "pm25": 97.5,
+      "n_hours": 22
+     },
+     {
+      "rel_day": 4,
+      "pm25": 109.7,
+      "n_hours": 23
+     },
+     {
+      "rel_day": 5,
+      "pm25": 79.0,
+      "n_hours": 24
+     }
+    ]
+   },
+   {
+    "year": 2024,
+    "kind": "station_actual",
+    "label": "2024 actual - Model Town station (CPCB)",
+    "note": "Measured station daily mean PM2.5 (IST calendar days, hourly archive).",
+    "points": [
+     {
+      "rel_day": -7,
+      "pm25": 57.1,
+      "n_hours": 24
+     },
+     {
+      "rel_day": -6,
+      "pm25": 68.8,
+      "n_hours": 24
+     },
+     {
+      "rel_day": -5,
+      "pm25": 59.7,
+      "n_hours": 24
+     },
+     {
+      "rel_day": -4,
+      "pm25": 90.0,
+      "n_hours": 24
+     },
+     {
+      "rel_day": -3,
+      "pm25": 78.6,
+      "n_hours": 24
+     },
+     {
+      "rel_day": -2,
+      "pm25": 66.0,
+      "n_hours": 24
+     },
+     {
+      "rel_day": -1,
+      "pm25": 102.3,
+      "n_hours": 24
+     },
+     {
+      "rel_day": 0,
+      "pm25": 114.0,
+      "n_hours": 24
+     },
+     {
+      "rel_day": 1,
+      "pm25": 121.6,
+      "n_hours": 24
+     },
+     {
+      "rel_day": 2,
+      "pm25": 107.2,
+      "n_hours": 24
+     },
+     {
+      "rel_day": 3,
+      "pm25": 93.3,
+      "n_hours": 24
+     },
+     {
+      "rel_day": 4,
+      "pm25": 99.8,
+      "n_hours": 23
+     },
+     {
+      "rel_day": 5,
+      "pm25": 81.5,
+      "n_hours": 24
+     }
+    ]
+   },
+   {
+    "year": 2025,
+    "kind": "regional_estimate",
+    "label": "2025 satellite estimate - CREA 10-km cell",
+    "note": "Satellite-modelled PM2.5 for the 10-km grid cell containing the station (CREA). NOT a station measurement; the cell is anchored to this monitor, so agreement with the station is not independent validation. Coverage starts D-5 (dataset begins Oct 15, 2025). Station archive ended Sep 1, 2025, so no measured 2025 Diwali values exist.",
+    "points": [
+     {
+      "rel_day": -5,
+      "pm25": 41.5
+     },
+     {
+      "rel_day": -4,
+      "pm25": 45.5
+     },
+     {
+      "rel_day": -3,
+      "pm25": 41.8
+     },
+     {
+      "rel_day": -2,
+      "pm25": 46.2
+     },
+     {
+      "rel_day": -1,
+      "pm25": 44.8
+     },
+     {
+      "rel_day": 0,
+      "pm25": 65.7
+     },
+     {
+      "rel_day": 1,
+      "pm25": 119.5
+     },
+     {
+      "rel_day": 2,
+      "pm25": 97.8
+     },
+     {
+      "rel_day": 3,
+      "pm25": 64.1
+     },
+     {
+      "rel_day": 4,
+      "pm25": 68.4
+     },
+     {
+      "rel_day": 5,
+      "pm25": 61.1
+     }
+    ]
+   },
+   {
+    "year": 2026,
+    "kind": "forecast",
+    "label": "2026 forecast - this dashboard's model",
+    "note": "Model forecast, not measurements.",
+    "points": [
+     {
+      "rel_day": -7,
+      "pm25": 92.2
+     },
+     {
+      "rel_day": -6,
+      "pm25": 93.1
+     },
+     {
+      "rel_day": -5,
+      "pm25": 86.1
+     },
+     {
+      "rel_day": -4,
+      "pm25": 95.4
+     },
+     {
+      "rel_day": -3,
+      "pm25": 99.2
+     },
+     {
+      "rel_day": -2,
+      "pm25": 96.3
+     },
+     {
+      "rel_day": -1,
+      "pm25": 119.0
+     },
+     {
+      "rel_day": 0,
+      "pm25": 119.8
+     },
+     {
+      "rel_day": 1,
+      "pm25": 131.6
+     },
+     {
+      "rel_day": 2,
+      "pm25": 143.9
+     },
+     {
+      "rel_day": 3,
+      "pm25": 132.3
+     },
+     {
+      "rel_day": 4,
+      "pm25": 127.8
+     },
+     {
+      "rel_day": 5,
+      "pm25": 116.1
+     }
+    ]
+   }
+  ]
+ },
+ "hourly_pattern": {
+  "years_used": [
+   2021,
+   2022,
+   2023,
+   2024
+  ],
+  "diwali_dates_used": [
+   "2021-11-04",
+   "2022-10-24",
+   "2023-11-12",
+   "2024-10-31"
+  ],
+  "hour_axis": "IST hour of day (0-23), station local time",
+  "diwali_days_avg": [
+   {
+    "hour": 0,
+    "pm25": 98.8,
+    "n_hours": 4
+   },
+   {
+    "hour": 1,
+    "pm25": 96.2,
+    "n_hours": 4
+   },
+   {
+    "hour": 2,
+    "pm25": 95.1,
+    "n_hours": 4
+   },
+   {
+    "hour": 3,
+    "pm25": 92.5,
+    "n_hours": 4
+   },
+   {
+    "hour": 4,
+    "pm25": 89.7,
+    "n_hours": 4
+   },
+   {
+    "hour": 5,
+    "pm25": 84.8,
+    "n_hours": 4
+   },
+   {
+    "hour": 6,
+    "pm25": 84.4,
+    "n_hours": 4
+   },
+   {
+    "hour": 7,
+    "pm25": 85.9,
+    "n_hours": 4
+   },
+   {
+    "hour": 8,
+    "pm25": 92.7,
+    "n_hours": 4
+   },
+   {
+    "hour": 9,
+    "pm25": 105.2,
+    "n_hours": 4
+   },
+   {
+    "hour": 10,
+    "pm25": 102.7,
+    "n_hours": 4
+   },
+   {
+    "hour": 11,
+    "pm25": 85.7,
+    "n_hours": 4
+   },
+   {
+    "hour": 12,
+    "pm25": 67.6,
+    "n_hours": 4
+   },
+   {
+    "hour": 13,
+    "pm25": 57.6,
+    "n_hours": 4
+   },
+   {
+    "hour": 14,
+    "pm25": 51.0,
+    "n_hours": 4
+   },
+   {
+    "hour": 15,
+    "pm25": 49.2,
+    "n_hours": 4
+   },
+   {
+    "hour": 16,
+    "pm25": 44.3,
+    "n_hours": 4
+   },
+   {
+    "hour": 17,
+    "pm25": 49.0,
+    "n_hours": 4
+   },
+   {
+    "hour": 18,
+    "pm25": 61.5,
+    "n_hours": 4
+   },
+   {
+    "hour": 19,
+    "pm25": 79.1,
+    "n_hours": 4
+   },
+   {
+    "hour": 20,
+    "pm25": 105.5,
+    "n_hours": 4
+   },
+   {
+    "hour": 21,
+    "pm25": 160.7,
+    "n_hours": 4
+   },
+   {
+    "hour": 22,
+    "pm25": 217.3,
+    "n_hours": 4
+   },
+   {
+    "hour": 23,
+    "pm25": 253.4,
+    "n_hours": 4
+   }
+  ],
+  "season_avg": [
+   {
+    "hour": 0,
+    "pm25": 104.1,
+    "n_hours": 128
+   },
+   {
+    "hour": 1,
+    "pm25": 101.5,
+    "n_hours": 128
+   },
+   {
+    "hour": 2,
+    "pm25": 98.4,
+    "n_hours": 127
+   },
+   {
+    "hour": 3,
+    "pm25": 95.4,
+    "n_hours": 127
+   },
+   {
+    "hour": 4,
+    "pm25": 92.1,
+    "n_hours": 127
+   },
+   {
+    "hour": 5,
+    "pm25": 88.8,
+    "n_hours": 125
+   },
+   {
+    "hour": 6,
+    "pm25": 85.9,
+    "n_hours": 126
+   },
+   {
+    "hour": 7,
+    "pm25": 83.6,
+    "n_hours": 126
+   },
+   {
+    "hour": 8,
+    "pm25": 82.0,
+    "n_hours": 126
+   },
+   {
+    "hour": 9,
+    "pm25": 81.4,
+    "n_hours": 128
+   },
+   {
+    "hour": 10,
+    "pm25": 79.1,
+    "n_hours": 126
+   },
+   {
+    "hour": 11,
+    "pm25": 74.8,
+    "n_hours": 124
+   },
+   {
+    "hour": 12,
+    "pm25": 69.0,
+    "n_hours": 122
+   },
+   {
+    "hour": 13,
+    "pm25": 62.9,
+    "n_hours": 123
+   },
+   {
+    "hour": 14,
+    "pm25": 60.9,
+    "n_hours": 128
+   },
+   {
+    "hour": 15,
+    "pm25": 58.9,
+    "n_hours": 128
+   },
+   {
+    "hour": 16,
+    "pm25": 58.5,
+    "n_hours": 128
+   },
+   {
+    "hour": 17,
+    "pm25": 62.8,
+    "n_hours": 128
+   },
+   {
+    "hour": 18,
+    "pm25": 72.3,
+    "n_hours": 127
+   },
+   {
+    "hour": 19,
+    "pm25": 82.7,
+    "n_hours": 128
+   },
+   {
+    "hour": 20,
+    "pm25": 92.0,
+    "n_hours": 128
+   },
+   {
+    "hour": 21,
+    "pm25": 99.9,
+    "n_hours": 127
+   },
+   {
+    "hour": 22,
+    "pm25": 107.2,
+    "n_hours": 128
+   },
+   {
+    "hour": 23,
+    "pm25": 109.3,
+    "n_hours": 128
+   }
+  ],
+  "season_definition": "all days Oct 15 - Nov 15, 2021-2024",
+  "note": "Historical pattern only - NOT an hourly forecast for 2026. Past evening spikes coincided with Diwali nights; this is co-occurrence in past data, not proof of cause. 2025 excluded: station archive ends Sep 1, 2025."
+ },
+ "evidence_note": "2026 values are model forecasts. Skill was measured on three held-out Diwali windows (2022-2024). A separate 7-day-lead test exists for the 2024 window only, and there the model did NOT beat the naive baseline - so longer-lead skill is unproven. Past errors are not a guarantee for 2026. Full validation tables: Model & Method tab.",
+ "caveats": [
+  "Station-level only (Model Town, Patiala CPCB site_1437) - not neighbourhood-exact.",
+  "PM2.5 concentration (ug/m3) with CPCB band labels; not a full National AQI.",
+  "2025 comparison series is a satellite-modelled regional estimate (CREA 10-km cell), not a station measurement.",
+  "Daily values average whatever hourly readings exist that day (no minimum hourly coverage threshold).",
+  "Past-year festival labels show the main Diwali day only; sub-festival dates for 2021-2025 are not verified."
+ ],
+ "sources": [
+  "https://airquality.xkdr.org/ (CPCB CAAQMS compilation, CC-BY 4.0)",
+  "https://open-meteo.com/en/docs",
+  "https://airquality.cpcb.gov.in/ccr_docs/How_AQI_Calculated.pdf",
+  "https://ncap.energyandcleanair.org/ (CREA satellite estimates)",
+  "https://www.ndtvprofit.com/india/november-2026-festival-calendar-check-dhanteras-diwali-bhai-dooj-dates-12262703 (festival calendar 2026, fetched 2026-11-01)"
+ ]
+}
