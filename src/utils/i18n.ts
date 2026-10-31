@@ -152,7 +152,7 @@ const en: Translations = {
   generated_at: 'Generated on',
   print_diwali_callout: 'Diwali 2026 Key Forecast Highlights',
   print_model_summary_title: 'Model & Evaluation Summary',
-  print_model_summary_body: 'Output is daily mean PM2.5 concentration (µg/m³) for the Model Town, Patiala CPCB CAAQMS monitoring station (site_1437). Model is a LightGBM regressor refit on station history 2021 through September 2025, using Open-Meteo weather forecasts. Skill was measured on three held-out Diwali windows (2022-2024); lead-matched scores exist for the 2024 window only: MAE 17.5 µg/m³ at 1-day lead (naive baseline 20.2). At 7-day lead the model does not beat the baseline, so longer-lead skill is unproven.',
+  print_model_summary_body: 'Output is daily mean PM2.5 concentration (µg/m³) for the Model Town, Patiala CPCB CAAQMS monitoring station (site_1437). Model is a LightGBM regressor trained on 38,150 hourly station readings (2021-Sep 2025) aggregated daily; the refit uses the 1,461 daily rows with complete features (2021-01-01 to 2024-12-31), with Open-Meteo weather, calendar and days-to-Diwali features. Skill was measured on three held-out Diwali windows (2022-2024); lead-matched scores exist for the 2024 window only: MAE 17.5 µg/m³ at 1-day lead (naive baseline 20.2). At 7-day lead the model does not beat the baseline, so longer-lead skill is unproven.',
   print_sources_title: 'Data Sources & Acknowledgements',
 };
 
@@ -225,7 +225,7 @@ const hi: Translations = {
   generated_at: 'रिपोर्ट निर्माण तिथि',
   print_diwali_callout: 'दिवाली 2026 मुख्य पूर्वानुमान बिंदु',
   print_model_summary_title: 'मॉडल और मूल्यांकन सारांश',
-  print_model_summary_body: 'आउटपुट मॉडल टाउन, पटियाला CPCB CAAQMS निगरानी स्टेशन (site_1437) के लिए दैनिक औसत PM2.5 सांद्रता (µg/m³) है। मॉडल LightGBM रिग्रेसर है जिसे स्टेशन इतिहास 2021 से सितंबर 2025 तक Open-Meteo मौसम पूर्वानुमानों के साथ पुनः प्रशिक्षित किया गया है। क्षमता तीन अलग रखी गई दिवाली अवधियों (2022-2024) पर मापी गई; लीड-मिलान स्कोर केवल 2024 अवधि के लिए हैं: 1-दिन की लीड पर MAE 17.5 µg/m³ (naive आधार 20.2)। 7-दिन की लीड पर मॉडल आधार से बेहतर नहीं है, इसलिए लंबी-लीड क्षमता अप्रमाणित है।',
+  print_model_summary_body: 'आउटपुट मॉडल टाउन, पटियाला CPCB CAAQMS निगरानी स्टेशन (site_1437) के लिए दैनिक औसत PM2.5 सांद्रता (µg/m³) है। मॉडल LightGBM रिग्रेसर है जिसे 38,150 घंटेवार स्टेशन रीडिंग (2021-सितंबर 2025) के दैनिक औसत पर प्रशिक्षित किया गया है; रिफिट पूर्ण फ़ीचर वाली 1,461 दैनिक पंक्तियों (2021-01-01 से 2024-12-31) का उपयोग करता है, Open-Meteo मौसम, कैलेंडर और दिवाली-तक-दिन फ़ीचर के साथ। क्षमता तीन अलग रखी गई दिवाली अवधियों (2022-2024) पर मापी गई; लीड-मिलान स्कोर केवल 2024 अवधि के लिए हैं: 1-दिन की लीड पर MAE 17.5 µg/m³ (naive आधार 20.2)। 7-दिन की लीड पर मॉडल आधार से बेहतर नहीं है, इसलिए लंबी-लीड क्षमता अप्रमाणित है।',
   print_sources_title: 'डेटा स्रोत और आभार',
 };
 
