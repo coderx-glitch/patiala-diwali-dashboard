@@ -1,6 +1,7 @@
 import React from 'react';
 import { ArrowRight, CloudSun, Wind, LineChart } from 'lucide-react';
 import { useLanguage } from '../utils/i18n';
+import Particles3D from './Particles3D';
 
 interface Props { onEnter: () => void }
 
@@ -12,8 +13,13 @@ const LandingPage: React.FC<Props> = ({ onEnter }) => {
       <div className="cloud" style={{ top: '12%', left: '6%', width: 220, height: 64 }} />
       <div className="cloud" style={{ top: '22%', right: '10%', width: 300, height: 78, animationDelay: '2s' }} />
       <div className="cloud" style={{ top: '46%', left: '14%', width: 170, height: 50, animationDelay: '4s', opacity: 0.7 }} />
+      {/* distant parallax clouds (smaller, slower, fainter = farther) */}
+      <div className="cloud" style={{ top: '8%', left: '42%', width: 120, height: 34, animationDuration: '22s', opacity: 0.45, filter: 'blur(22px)' }} />
+      <div className="cloud" style={{ top: '34%', right: '30%', width: 90, height: 26, animationDuration: '26s', animationDelay: '7s', opacity: 0.4, filter: 'blur(24px)' }} />
+      {/* real-3D particle layer (perspective-projected points, GPU-cheap canvas) */}
+      <Particles3D density={1.15} fixed={false} />
       {/* sun */}
-      <div className="absolute rounded-full" style={{ top: '7%', right: '14%', width: 110, height: 110,
+      <div className="absolute rounded-full sun-pulse" style={{ top: '7%', right: '14%', width: 110, height: 110,
         background: 'radial-gradient(circle, rgba(253,224,71,0.9) 0%, rgba(251,191,36,0.35) 55%, transparent 72%)', filter: 'blur(2px)' }} />
 
       {/* top bar */}

@@ -13,6 +13,7 @@ import { FileUploaderModal } from './components/FileUploaderModal';
 import { PrintReport } from './components/PrintReport';
 import { LanguageProvider, useLanguage } from './utils/i18n';
 import LandingPage from './components/LandingPage';
+import Particles3D from './components/Particles3D';
 import type { BacktestData, PredictionsData } from './types/airQuality';
 import {
   fetchLiveBacktest,
@@ -176,6 +177,7 @@ const AppContent: React.FC = () => {
     <div className="min-h-screen bg-[#faf8f5] text-stone-900 flex flex-col font-sans transition-colors">
       <div className="ambient-orb" style={{ top: '18%', left: '-6%', width: 340, height: 340, background: 'rgba(251, 191, 36, 0.16)' }} />
       <div className="ambient-orb" style={{ bottom: '8%', right: '-8%', width: 420, height: 420, background: 'rgba(56, 189, 248, 0.13)', animationDelay: '6s' }} />
+      {entered && <Particles3D density={0.85} />}
       {/* 1. Single-Page Printable Report (Visible ONLY in print media) */}
       {predictions && (
         <PrintReport
