@@ -4,7 +4,7 @@ import * as maplibregl from 'maplibre-gl';
 import maplibreWorkerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?url';
 (maplibregl as any).setWorkerUrl(maplibreWorkerUrl);
 import 'maplibre-gl/dist/maplibre-gl.css';
-import { Flame, Trash2, Factory, CloudFog, Camera, MapPin, Send, ShieldAlert, Loader2 } from 'lucide-react';
+import { Flame, Trash2, Factory, CloudFog, Camera, MapPin, Send, ShieldAlert } from 'lucide-react';
 
 const CATEGORIES = [
   { id: 'firecracker', label: 'Firecracker activity', color: '#dc2626', Icon: Flame },
@@ -36,25 +36,6 @@ async function cleanPhoto(file: File): Promise<string> {
   return c.toDataURL('image/jpeg', 0.82);
 }
 
-// lazy-load on-device AI (MobileNet) from CDN only when a photo is attached
-let aiPromise: Promise<any> | null = null;
-function loadScript(src: string): Promise<void> {
-  return new Promise((resolve, reject) => {
-    const s = document.createElement('script'); s.src = src; s.onload = () => resolve(); s.onerror = () => reject(new Error('cdn')); document.head.appendChild(s);
-  });
-}
-async function classifyImage(img: HTMLImageElement): Promise<{ className: string; probability: number }[]> {
-  if (!aiPromise) {
-    aiPromise = (async () => {
-      await loadScript('https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0/dist/tf.min.js');
-      await loadScript('https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@2.1.1/dist/mobilenet.min.js');
-      return (window as any).mobilenet.load({ version: 1, alpha: 0.25 });
-    })();
-  }
-  const net = await aiPromise;
-  return net.classify(img, 3);
-}
-
 function km(a: Report, b: Report) {
   const dx = (a.lon - b.lon) * 96.4, dy = (a.lat - b.lat) * 111;
   return Math.sqrt(dx * dx + dy * dy);
@@ -67,13 +48,11 @@ export const CommunityReports: React.FC = () => {
   const [pos, setPos] = useState<[number, number] | null>(null);
   const [note, setNote] = useState('');
   const [photo, setPhoto] = useState<string | null>(null);
-  const [ai, setAi] = useState<{ labels: string[]; state: 'idle' | 'loading' | 'done' | 'failed' }>({ labels: [], state: 'idle' });
   const [sending, setSending] = useState(false);
   const [msg, setMsg] = useState<string | null>(null);
   const mapEl = useRef<HTMLDivElement>(null);
   const mapRef = useRef<maplibregl.Map | null>(null);
   const markerRef = useRef<maplibregl.Marker | null>(null);
-  const imgRef = useRef<HTMLImageElement>(null);
 
   const refresh = () => {
     fetch('/api/reports').then((r) => r.json()).then((d) => setReports(d.reports || [])).catch(() => setLoadErr('Reports could not be loaded (the reports service runs on the live site).'));
@@ -125,21 +104,8 @@ export const CommunityReports: React.FC = () => {
   }, [pos]);
 
   const onPhoto = async (f: File | null) => {
-    setAi({ labels: [], state: 'idle' });
     if (!f) { setPhoto(null); return; }
-    try {
-      const cleaned = await cleanPhoto(f);
-      setPhoto(cleaned);
-      setAi({ labels: [], state: 'loading' });
-      // classify once the preview img is ready
-      setTimeout(async () => {
-        try {
-          if (!imgRef.current) throw new Error('noimg');
-          const preds = await classifyImage(imgRef.current);
-          setAi({ labels: preds.map((p: any) => p.className.split(',')[0]), state: 'done' });
-        } catch { setAi({ labels: [], state: 'failed' }); }
-      }, 350);
-    } catch { setPhoto(null); }
+    try { setPhoto(await cleanPhoto(f)); } catch { setPhoto(null); }
   };
 
   const corroboration = useMemo(() => {
@@ -162,7 +128,7 @@ export const CommunityReports: React.FC = () => {
       const d = await r.json();
       if (!r.ok) throw new Error(d.error || 'submit failed');
       setMsg('Report submitted. It is public, anonymous and auto-expires in 72 hours.');
-      setNote(''); setPhoto(null); setPos(null); setAi({ labels: [], state: 'idle' });
+      setNote(''); setPhoto(null); setPos(null);
       refresh();
     } catch (e: any) { setMsg(`Submit failed: ${e.message}`); }
     setSending(false);
@@ -211,14 +177,7 @@ export const CommunityReports: React.FC = () => {
               <input type="file" accept="image/*" className="hidden" onChange={(e) => onPhoto(e.target.files?.[0] || null)} />
             </label>
             {photo && (
-              <div className="space-y-1">
-                <img ref={imgRef} src={photo} alt="Report evidence preview" className="max-h-36 rounded-lg border border-stone-200" crossOrigin="anonymous" />
-                <div className="text-[10px] text-stone-500">
-                  {ai.state === 'loading' && <span className="flex items-center gap-1"><Loader2 className="w-3 h-3 animate-spin" /> On-device AI reading the photo…</span>}
-                  {ai.state === 'done' && <span>On-device AI hint - generic object model, <em>not</em> trained for smoke/fire, may mislabel; unverified: <strong>{ai.labels.join(' · ')}</strong></span>}
-                  {ai.state === 'failed' && <span>On-device AI hint unavailable (offline or unsupported device) - report still works.</span>}
-                </div>
-              </div>
+              <img src={photo} alt="Report evidence preview" className="max-h-36 rounded-lg border border-stone-200" />
             )}
             <button onClick={submit} disabled={sending}
               className="flex items-center gap-1.5 px-3 py-2 rounded-lg bg-amber-700 text-white text-xs font-semibold disabled:opacity-50">
@@ -268,7 +227,7 @@ export const CommunityReports: React.FC = () => {
 
       <div className="rounded-xl border border-stone-200 bg-stone-50 p-3 text-[11px] text-stone-600 leading-relaxed">
         <p className="flex items-start gap-1.5"><ShieldAlert className="w-3.5 h-3.5 mt-0.5 shrink-0 text-stone-400" />
-          <span><strong className="text-stone-800">Honesty box:</strong> every report is an <em>unverified community submission</em>. "Community-corroborated" only means 2+ reports of the same type within ~1 km and 3 hours - it is not authority verification. The photo hint is a generic on-device object model (MobileNet) - in our own test it labelled a real stubble-burning photo 'geyser/volcano'. It is not a pollution classifier. These reports supplement the single CPCB monitor; they are not measurements.</span>
+          <span><strong className="text-stone-800">Honesty box:</strong> every report is an <em>unverified community submission</em>. "Community-corroborated" only means 2+ reports of the same type within ~1 km and 3 hours - it is not authority verification. AI photo classification is NOT offered: a generic on-device model (MobileNet) tested on a real stubble-burning photo answered 'geyser/volcano' - useless for pollution. No auto-classification ships until a model that actually detects smoke/fire is validated. These reports supplement the single CPCB monitor; they are not measurements.</span>
         </p>
       </div>
     </div>

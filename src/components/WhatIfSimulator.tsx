@@ -60,8 +60,9 @@ export const WhatIfSimulator: React.FC = () => {
         <div>
           <h2 className="font-serif font-bold text-stone-900 text-base">What-if Pollution Simulator - Model Sensitivity</h2>
           <p className="text-[11px] text-stone-500 mt-0.5">
-            Change one input, and the same trained model re-computes the station forecast (deployed forecast + model delta).
-            Sensitivity of the model, not a causal policy estimate.
+            Precomputed responses: the same trained model was re-run offline on ONE fixed weather baseline, changing one
+            input at a time (each scenario paired against the same baseline run). Shown as live forecast + model delta.
+            Model sensitivity, not a causal policy estimate.
           </p>
         </div>
 
@@ -142,6 +143,7 @@ export const WhatIfSimulator: React.FC = () => {
           <span><strong className="text-stone-800">What this is:</strong> {data.method.split('. Traffic')[0]}.</span>
         </p>
         <p><strong className="text-stone-800">What it is not:</strong> traffic %, firecracker % and zone-restriction scenarios are <em>not adjustable</em> - the model was trained on 4 years of station + weather data and has no learned features for them, so any number would be invented. It predicts PM2.5 concentration at one station, not full AQI, and a model sensitivity is not proof a policy will work.</p>
+        <p><strong className="text-stone-800">Method detail:</strong> scenarios are not run on request - they were generated once with the deployed model. The weather forecast has drifted since the site's forecast was issued (the re-run baseline differs from the live forecast by up to {data.refit_vs_deployed_max_abs_diff.toFixed(0)} µg/m³ on some days), so the site shows the <em>delta</em> each input change made within the same paired run, added to the live forecast - never the re-run's absolute values.</p>
       </div>
     </div>
   );

@@ -41,9 +41,17 @@ function publicView(r) {
   return rest;
 }
 
+// PUBLICATION HOLD: community reporting is not authorized for public use yet
+// (publication model - direct vs approval-first - pending the owner's decision).
+// The API must not accept, store, or expose submissions until then.
+const COMMUNITY_PUBLICATION_ENABLED = false;
+
 export default async function handler(req, res) {
   cors(res);
   if (req.method === 'OPTIONS') return res.status(204).end();
+  if (!COMMUNITY_PUBLICATION_ENABLED) {
+    return res.status(503).json({ error: 'community reporting is not enabled', enabled: false });
+  }
 
   if (req.method === 'GET') {
     const now = Date.now();
