@@ -125,3 +125,6 @@ header.sticky {
     radial-gradient(520px 300px at 96% 100%, rgba(125, 180, 220, 0.16), transparent 60%),
     linear-gradient(180deg, #ffffff 0%, #fffdfb 100%) !important;
 }
+
+/* Interactive 3D tilt on the hero card (pointer only; touch untouched) */
+.hero-tilt { transition: transform 0.18s ease-out, box-shadow 0.25s ease; will-change: transform; transform-style: preserve-3d; }

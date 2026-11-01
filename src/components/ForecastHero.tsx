@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import type { BacktestData, PredictionsData, PredictionItem } from '../types/airQuality';
 import { CPCB_NAAQS_STANDARD, WHO_AIR_QUALITY_GUIDELINE, getCpcbCategory } from '../utils/aqiColors';
 import { calculateEpaSubIndex, EPA_NOTE, EPA_LABEL, CPCB_LABEL } from '../utils/epaAqi';
@@ -24,6 +24,20 @@ interface ForecastHeroProps {
 }
 
 export const ForecastHero: React.FC<ForecastHeroProps> = ({ predictionsData, backtestData }) => {
+  const heroTiltRef = useRef<HTMLDivElement | null>(null);
+  const onHeroTilt = (e: React.MouseEvent<HTMLDivElement>) => {
+    const el = heroTiltRef.current;
+    if (!el || (e.nativeEvent as PointerEvent).pointerType === 'touch') return;
+    const r = el.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width - 0.5;
+    const y = (e.clientY - r.top) / r.height - 0.5;
+    el.style.transform = `perspective(1200px) rotateX(${(-y * 2.6).toFixed(2)}deg) rotateY(${(x * 3.2).toFixed(2)}deg) translateY(-2px)`;
+  };
+  const onHeroTiltEnd = () => {
+    const el = heroTiltRef.current;
+    if (el) el.style.transform = '';
+  };
+
   const { t, language } = useLanguage();
 
   // Find Diwali date (days_to_diwali === 0)
@@ -173,7 +187,7 @@ export const ForecastHero: React.FC<ForecastHeroProps> = ({ predictionsData, bac
                 onClick={() => setSelectedDate(p.date)}
                 className={`relative flex flex-col items-center justify-center py-2 px-2 rounded-lg border text-center transition cursor-pointer shrink-0 min-w-[65px] sm:min-w-0 ${
                   isSelected
-                    ? 'bg-gradient-to-br from-orange-600 via-orange-500 to-amber-500 text-white border-orange-500 day-glow'
+                    ? 'bg-gradient-to-br from-orange-600 via-orange-500 to-amber-500 text-white border-orange-500 day-glow scale-105 z-10'
                     : isItemDiwali
                     ? 'bg-amber-50/80 border-amber-300 text-stone-800 hover:bg-amber-100/70'
                     : 'bg-white border-stone-200 text-stone-700 hover:border-sky-300 hover:bg-sky-50/70 hover:-translate-y-0.5 hover:shadow-md'
@@ -202,7 +216,11 @@ export const ForecastHero: React.FC<ForecastHeroProps> = ({ predictionsData, bac
       </div>
 
       {/* 2. ONE Big Answer for the Selected Day with Dual Sub-Indices & Weather Context */}
-      <div className="rounded-2xl bg-white border border-stone-200 p-6 sm:p-8 shadow-xs hero-card">
+      <div
+        ref={heroTiltRef}
+        onMouseMove={onHeroTilt}
+        onMouseLeave={onHeroTiltEnd}
+        className="rounded-2xl bg-white border border-stone-200 p-6 sm:p-8 shadow-xs hero-card hero-tilt">
         {/* Day Context & Badges */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 pb-4 border-b border-stone-100">
           <div>
