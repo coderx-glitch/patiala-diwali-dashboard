@@ -20,9 +20,10 @@ interface NotificationOptInProps {
 
 type NotificationState = 'loading' | 'unsupported' | 'idle' | 'pending' | 'active' | 'denied';
 
-// The 4 supported daily delivery windows (Asia/Kolkata). Backed by daily Vercel cron entries
-// at UTC hours 1/3/13/15; Hobby cron fires within the UTC hour, landing in these IST half-hour windows.
+// The 5 supported daily delivery windows (Asia/Kolkata). Backed by daily Vercel cron entries
+// at UTC hours 0/1/3/13/15; Hobby cron fires within the UTC hour, landing in these IST half-hour windows.
 const ALERT_WINDOWS: { utc: number; label: string }[] = [
+  { utc: 0, label: 'Subah 5:30-6:29 AM' },
   { utc: 1, label: 'Subah 6:30-7:29 AM' },
   { utc: 3, label: 'Subah 8:30-9:29 AM' },
   { utc: 13, label: 'Shaam 6:30-7:29 PM' },

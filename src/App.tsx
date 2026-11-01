@@ -12,6 +12,7 @@ import { NotificationOptIn } from './components/NotificationOptIn';
 import { FileUploaderModal } from './components/FileUploaderModal';
 import { PrintReport } from './components/PrintReport';
 import { LanguageProvider, useLanguage } from './utils/i18n';
+import LandingPage from './components/LandingPage';
 import type { BacktestData, PredictionsData } from './types/airQuality';
 import {
   fetchLiveBacktest,
@@ -25,6 +26,16 @@ type TabKey = 'forecast' | 'special' | 'graph' | 'daily' | 'method' | 'map';
 
 const AppContent: React.FC = () => {
   const { t } = useLanguage();
+  const [entered, setEntered] = useState<boolean>(() => {
+    try {
+      if (new URLSearchParams(window.location.search).get('enter') === '1') return true;
+      return sessionStorage.getItem('dw_entered') === '1';
+    } catch { return false; }
+  });
+  const handleEnter = () => {
+    try { sessionStorage.setItem('dw_entered', '1'); } catch { /* private mode */ }
+    setEntered(true);
+  };
   const [predictions, setPredictions] = useState<PredictionsData | null>(null);
   const [backtest, setBacktest] = useState<BacktestData | null>(null);
   const [predictionsError, setPredictionsError] = useState<string | null>(null);
@@ -163,6 +174,8 @@ const AppContent: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-[#faf8f5] text-stone-900 flex flex-col font-sans transition-colors">
+      <div className="ambient-orb" style={{ top: '18%', left: '-6%', width: 340, height: 340, background: 'rgba(251, 191, 36, 0.16)' }} />
+      <div className="ambient-orb" style={{ bottom: '8%', right: '-8%', width: 420, height: 420, background: 'rgba(56, 189, 248, 0.13)', animationDelay: '6s' }} />
       {/* 1. Single-Page Printable Report (Visible ONLY in print media) */}
       {predictions && (
         <PrintReport
@@ -173,6 +186,9 @@ const AppContent: React.FC = () => {
       )}
 
       {/* 2. Interactive App View (Hidden during print) */}
+      {!entered ? (
+        <LandingPage onEnter={handleEnter} />
+      ) : (
       <div className="print:hidden flex flex-col min-h-screen">
         {/* Header */}
         <Header
@@ -186,7 +202,7 @@ const AppContent: React.FC = () => {
         />
 
         {/* Main Content Area */}
-        <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
+        <main className="flex-1 max-w-[1440px] w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
           {isLoading ? (
             <div className="py-24 flex flex-col items-center justify-center text-center">
               <RefreshCw className="w-8 h-8 text-amber-600 animate-spin mb-3" />
@@ -276,7 +292,7 @@ const AppContent: React.FC = () => {
 
         {/* Footer */}
         <footer className="border-t border-stone-200/90 bg-[#faf8f5]/90 py-6 text-xs text-stone-500 transition-colors">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-2">
               <div className="w-2 h-2 rounded-full bg-emerald-600"></div>
               <span>
@@ -307,6 +323,7 @@ const AppContent: React.FC = () => {
           currentBacktest={backtest}
         />
       </div>
+      )}
     </div>
   );
 };

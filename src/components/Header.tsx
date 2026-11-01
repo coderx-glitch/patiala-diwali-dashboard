@@ -28,8 +28,9 @@ export const Header: React.FC<HeaderProps> = ({
   };
 
   return (
-    <header className="border-b border-stone-200/90 bg-[#faf8f5]/90 backdrop-blur sticky top-0 z-40 transition-colors print:hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-3 pb-3">
+    <header className="relative border-b border-stone-200/90 bg-[#faf8f5]/90 backdrop-blur sticky top-0 z-40 transition-colors print:hidden">
+      <div className="festive-ribbon" />
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-4">
         {/* Eyebrow line */}
         <div className="text-[10px] uppercase tracking-widest text-stone-500 font-semibold mb-1 font-mono">
           DATA: CPCB CAAQMS (PPCB STATION) VIA XKDR, CC-BY 4.0
@@ -80,7 +81,7 @@ export const Header: React.FC<HeaderProps> = ({
               </button>
             </div>
 
-            <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold tracking-wider uppercase border border-amber-600/70 text-amber-800 bg-amber-50/60 font-mono">
+            <span className="pill-premium inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold tracking-wider uppercase text-amber-900 font-mono">
               STATION-LEVEL · SITE_1437
             </span>
 

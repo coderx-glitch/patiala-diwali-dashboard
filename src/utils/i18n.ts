@@ -11,6 +11,15 @@ export interface Translations {
   tab_method: string;
   tab_map: string;
 
+  // Landing page
+  landing_eyebrow: string;
+  landing_tagline: string;
+  landing_stat1: string;
+  landing_stat2: string;
+  landing_stat3: string;
+  landing_cta: string;
+  landing_footer: string;
+
   // Header & Global
   title: string;
   station_name: string;
@@ -84,6 +93,13 @@ export interface Translations {
 }
 
 const en: Translations = {
+  landing_eyebrow: 'CPCB station data + Open-Meteo weather',
+  landing_tagline: 'A 13-day station-level PM2.5 forecast for Patiala around Diwali 2026 (Nov 8), built from weather, calendar and festival timing - with its test scores and limits shown openly.',
+  landing_stat1: 'Diwali Nov 8: 119.8 µg/m³ (Poor)',
+  landing_stat2: 'Peak Nov 10: 143.9 µg/m³ (Very Poor)',
+  landing_stat3: '1-day test error 17.5 vs 20.2 baseline',
+  landing_cta: 'Get Started',
+  landing_footer: 'Model Town, Patiala (CPCB site_1437) · LightGBM · Open source',
   tab_forecast: 'Forecast',
   tab_special: 'Diwali Special',
   tab_graph: 'Graph',
@@ -157,6 +173,13 @@ const en: Translations = {
 };
 
 const hi: Translations = {
+  landing_eyebrow: 'CPCB स्टेशन डेटा + Open-Meteo मौसम',
+  landing_tagline: 'दिवाली 2026 (8 नवंबर) के आसपास पटियाला के लिए 13-दिन का स्टेशन-स्तरीय PM2.5 पूर्वानुमान - मौसम, कैलेंडर और त्योहार के समय से बना, अपने टेस्ट स्कोर और सीमाओं के साथ।',
+  landing_stat1: 'दिवाली 8 नव: 119.8 µg/m³ (Poor)',
+  landing_stat2: 'पीक 10 नव: 143.9 µg/m³ (Very Poor)',
+  landing_stat3: '1-दिन टेस्ट एरर 17.5, baseline 20.2',
+  landing_cta: 'शुरू करें',
+  landing_footer: 'मॉडल टाउन, पटियाला (CPCB site_1437) · LightGBM · ओपन सोर्स',
   tab_forecast: 'पूर्वानुमान',
   tab_special: 'दिवाली स्पेशल',
   tab_graph: 'ग्राफ़',
