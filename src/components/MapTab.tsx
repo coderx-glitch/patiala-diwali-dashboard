@@ -5,21 +5,26 @@ import maplibreWorkerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?url';
 (maplibregl as any).setWorkerUrl(maplibreWorkerUrl);
 import 'maplibre-gl/dist/maplibre-gl.css';
 import { MapPin, AlertTriangle } from 'lucide-react';
-import { CPCB_CATEGORIES, getCpcbCategory } from '../utils/aqiColors';
+import { getCpcbCategory } from '../utils/aqiColors';
 
 interface MapValues { dates: string[]; values: number[][][]; }
 interface MapMeta { station: { lon: number; lat: number; cell_lon: number; cell_lat: number }; R: number; dates0: string; dates1: string; }
 
-const BAND_STOPS: [number, string][] = [
-  [30, CPCB_CATEGORIES.Good.color],
-  [60, CPCB_CATEGORIES.Satisfactory.color],
-  [90, CPCB_CATEGORIES.Moderate.color],
-  [120, CPCB_CATEGORIES.Poor.color],
-  [250, CPCB_CATEGORIES['Very Poor'].color],
+// Continuous spectral ramp ANCHORED at the exact CPCB thresholds:
+// same band boundaries (30/60/90/120/250), colors blend between them for
+// display only. The click popup still reports the exact cell value + band.
+const RAMP_STOPS: [number, string][] = [
+  [0, '#3b82f6'],    // blue (low)
+  [30, '#22d3ee'],   // cyan  - Good/Satisfactory boundary
+  [60, '#34d399'],   // emerald - Satisfactory/Moderate
+  [90, '#a3e635'],   // lime - Moderate/Poor
+  [120, '#facc15'],  // yellow - Poor/Very Poor
+  [170, '#fb923c'],  // orange (inside Very Poor)
+  [250, '#ef4444'],  // red - Very Poor/Severe
+  [420, '#a855f7'],  // purple (deep Severe)
 ];
-const colorExpr: any = ['step', ['get', 'pm25'], CPCB_CATEGORIES.Good.color,
-  30, CPCB_CATEGORIES.Satisfactory.color, 60, CPCB_CATEGORIES.Moderate.color,
-  90, CPCB_CATEGORIES.Poor.color, 120, CPCB_CATEGORIES['Very Poor'].color, 250, CPCB_CATEGORIES.Severe.color];
+const colorExpr: any = ['interpolate', ['linear'], ['get', 'pm25'],
+  ...RAMP_STOPS.flatMap(([v, c]) => [v, c])];
 
 const DEFAULT_DATE = '2025-10-20'; // Diwali day 2025
 
@@ -58,8 +63,8 @@ export const MapTab: React.FC = () => {
         style: 'https://tiles.openfreemap.org/styles/positron',
         center: [meta.station.lon, meta.station.lat - 0.12],
         zoom: 8.6,
-        pitch: 55,
-        bearing: -18,
+        pitch: 0,
+        bearing: 0,
         attributionControl: { compact: true },
       });
     } catch (e) {
@@ -80,6 +85,9 @@ export const MapTab: React.FC = () => {
       const layers = map.getStyle().layers || [];
       const firstSymbol = layers.find((l: any) => l.type === 'symbol' && l.layout && l.layout['text-field']);
       const beforeId = firstSymbol ? firstSymbol.id : undefined;
+      // heat goes UNDER roads/buildings (reference look: crisp streets over color)
+      const firstRoad = layers.find((l: any) => /road|transport|building/i.test(l.id));
+      const heatBeforeId = firstRoad ? firstRoad.id : beforeId;
       map.addSource('crea', { type: 'geojson', data: withValues(grid, vals, dateIdx) });
       // heatmap needs point geometry - derive cell centroids from the same grid
       map.addSource('crea-pts', { type: 'geojson', data: withValues(toPoints(grid), vals, dateIdx) });
@@ -101,11 +109,11 @@ export const MapTab: React.FC = () => {
         id: 'crea-heat', type: 'circle', source: 'crea-pts', maxzoom: 13,
         paint: {
           'circle-color': colorExpr,
-          'circle-radius': ['interpolate', ['linear'], ['zoom'], 8, 38, 10, 64, 13, 110],
+          'circle-radius': ['interpolate', ['linear'], ['zoom'], 8, 46, 10, 78, 13, 130],
           'circle-blur': 1,
-          'circle-opacity': ['interpolate', ['linear'], ['zoom'], 8, 0.58, 12.5, 0.38, 13, 0],
+          'circle-opacity': ['interpolate', ['linear'], ['zoom'], 8, 0.62, 12.5, 0.44, 13, 0],
         },
-      }, 'crea-extrusion');
+      }, heatBeforeId);
       // Satellite imagery basemap (EOxCloudless Sentinel-2 2024, keyless public endpoint).
       // Verified license: CC BY-NC-SA 4.0 - free for NON-COMMERCIAL use with attribution
       // (cloudless.eox.at/license-non-commercial). Esri/Google imagery is NOT licensed for
@@ -225,22 +233,29 @@ export const MapTab: React.FC = () => {
           Heatmap smooths between the 10-km cells for display - it does not add finer resolution or a 2026 forecast.
         </p>
 
-        {/* legend */}
-        <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[10px] text-stone-600">
-          <span className="font-semibold text-stone-500 uppercase tracking-wide">PM2.5 (CPCB bands):</span>
-          {BAND_STOPS.map(([hi, c], i) => (
-            <span key={hi} className="flex items-center gap-1">
-              <span className="inline-block w-2.5 h-2.5 rounded-sm" style={{ background: c }} />
-              {i === 0 ? `0-${hi}` : `${BAND_STOPS[i - 1][0] + 1}-${hi}`}
+        {/* legend: gradient anchored at CPCB thresholds */}
+        <div className="space-y-1 text-[10px] text-stone-600">
+          <div className="flex items-center gap-3 flex-wrap">
+            <span className="font-semibold text-stone-500 uppercase tracking-wide">PM2.5 ug/m3 (CPCB thresholds):</span>
+            <span className="flex items-center gap-1">
+              <MapPin className="w-3 h-3 text-cyan-700" /> monitoring station location
             </span>
-          ))}
-          <span className="flex items-center gap-1">
-            <span className="inline-block w-2.5 h-2.5 rounded-sm" style={{ background: CPCB_CATEGORIES.Severe.color }} />
-            &gt;250
-          </span>
-          <span className="flex items-center gap-1">
-            <MapPin className="w-3 h-3 text-cyan-700" /> monitoring station location
-          </span>
+          </div>
+          <div className="max-w-md">
+            <div className="h-2.5 rounded-full border border-stone-200" style={{ background: 'linear-gradient(to right, #3b82f6 0%, #22d3ee 7%, #34d399 14%, #a3e635 21%, #facc15 29%, #fb923c 40%, #ef4444 60%, #a855f7 100%)' }} />
+            <div className="relative h-3 font-mono text-stone-500">
+              <span className="absolute" style={{ left: '0%' }}>0</span>
+              <span className="absolute" style={{ left: '7%' }}>30</span>
+              <span className="absolute" style={{ left: '14%' }}>60</span>
+              <span className="absolute" style={{ left: '21%' }}>90</span>
+              <span className="absolute" style={{ left: '29%' }}>120</span>
+              <span className="absolute" style={{ left: '60%' }}>250</span>
+              <span className="absolute" style={{ right: '0%' }}>400+</span>
+            </div>
+            <div className="flex flex-wrap gap-x-2 text-stone-500">
+              <span>0-30 Good</span><span>31-60 Satisfactory</span><span>61-90 Moderate</span><span>91-120 Poor</span><span>121-250 Very Poor</span><span>&gt;250 Severe</span>
+            </div>
+          </div>
         </div>
       </div>
 
