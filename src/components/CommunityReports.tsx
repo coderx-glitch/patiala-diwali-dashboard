@@ -127,7 +127,9 @@ export const CommunityReports: React.FC = () => {
       });
       const d = await r.json();
       if (!r.ok) throw new Error(d.error || 'submit failed');
-      setMsg('Report submitted. It is public, anonymous and auto-expires in 72 hours.');
+      setMsg(d.queued
+        ? 'Report submitted. It will appear publicly after a moderator approves it. Anonymous, auto-expires in 72 hours.'
+        : 'Report submitted. It is public, anonymous and auto-expires in 72 hours.');
       setNote(''); setPhoto(null); setPos(null);
       refresh();
     } catch (e: any) { setMsg(`Submit failed: ${e.message}`); }
