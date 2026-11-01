@@ -127,4 +127,17 @@ header.sticky {
 }
 
 /* Interactive 3D tilt on the hero card (pointer only; touch untouched) */
-.hero-tilt { transition: transform 0.18s ease-out, box-shadow 0.25s ease; will-change: transform; transform-style: preserve-3d; }
+/* Continuous gentle 3D sway on all devices: animates the independent `rotate`/`translate`
+   properties, which compose with the JS pointer-tilt `transform` (no conflict). */
+@keyframes hero-sway {
+  0%, 100% { rotate: x 0.7deg; translate: 0 0; }
+  50% { rotate: x -0.7deg; translate: 0 -3px; }
+}
+@keyframes hero-shadow-pulse {
+  0%, 100% { box-shadow: 0 14px 34px -12px rgba(154, 52, 18, 0.22), 0 4px 12px -6px rgba(28, 25, 23, 0.10); }
+  50% { box-shadow: 0 20px 44px -12px rgba(154, 52, 18, 0.34), 0 6px 16px -6px rgba(28, 25, 23, 0.14); }
+}
+@keyframes day-bob { 0%, 100% { translate: 0 0; } 50% { translate: 0 -3px; } }
+.hero-card.hero-tilt { transition: transform 0.18s ease-out, box-shadow 0.25s ease; will-change: transform; transform-style: preserve-3d; animation: fade-up 0.45s ease-out both, hero-sway 9s ease-in-out 0.6s infinite; }
+.hero-card { animation: hero-shadow-pulse 7s ease-in-out infinite; }
+.day-glow { animation: day-bob 5s ease-in-out infinite; }

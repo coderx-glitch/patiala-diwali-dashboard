@@ -85,8 +85,8 @@ const Particles3D: React.FC<{ density?: number; fixed?: boolean }> = ({ density 
         const sx = cx + (xr + Math.sin(p.ph) * 10) * s;
         const sy = cy + p.y * s;
         if (sx < -40 || sx > w + 40 || sy < -40 || sy > h + 40) continue;
-        const size = Math.max(2, p.r * s * 18);
-        ctx.globalAlpha = Math.min(0.72, Math.max(0.06, s * 0.5));
+        const size = Math.max(2, p.r * s * 20);
+        ctx.globalAlpha = Math.min(0.8, Math.max(0.07, s * 0.55));
         ctx.drawImage(sprites[p.tint], sx - size / 2, sy - size / 2, size, size);
       }
       ctx.globalAlpha = 1;

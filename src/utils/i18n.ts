@@ -10,6 +10,8 @@ export interface Translations {
   tab_daily: string;
   tab_method: string;
   tab_map: string;
+  tab_whatif: string;
+  tab_community: string;
 
   // Landing page
   landing_eyebrow: string;
@@ -106,6 +108,8 @@ const en: Translations = {
   tab_daily: 'Daily list',
   tab_method: 'Model & Method',
   tab_map: 'Map',
+  tab_whatif: 'What-if',
+  tab_community: 'Community',
 
   title: 'Diwali Air Quality Prediction - Patiala',
   station_name: 'Model Town, Patiala - PPCB CAAQMS station site_1437 | Diwali 2026 (Nov 8) | PM2.5 µg/m³',
@@ -186,6 +190,8 @@ const hi: Translations = {
   tab_daily: 'दैनिक सूची',
   tab_method: 'मॉडल और विधि',
   tab_map: 'Map',
+  tab_whatif: 'What-if',
+  tab_community: 'Community',
 
   title: 'दिवाली वायु गुणवत्ता पूर्वानुमान - पटियाला',
   station_name: 'मॉडल टाउन, पटियाला - PPCB CAAQMS स्टेशन site_1437 | दिवाली 2026 (8 नवंबर) | PM2.5 µg/m³',

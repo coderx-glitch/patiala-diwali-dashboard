@@ -7,6 +7,8 @@ import { BacktestChart } from './components/BacktestChart';
 import { PredictionTable } from './components/PredictionTable';
 import { MethodologySection } from './components/MethodologySection';
 import { MapTab } from './components/MapTab';
+import { WhatIfSimulator } from './components/WhatIfSimulator';
+import { CommunityReports } from './components/CommunityReports';
 import { DiwaliSpecial } from './components/DiwaliSpecial';
 import { NotificationOptIn } from './components/NotificationOptIn';
 import { FileUploaderModal } from './components/FileUploaderModal';
@@ -23,7 +25,9 @@ import {
 } from './utils/dataLoader';
 import { RefreshCw } from 'lucide-react';
 
-type TabKey = 'forecast' | 'special' | 'graph' | 'daily' | 'method' | 'map';
+type TabKey = 'forecast' | 'special' | 'graph' | 'daily' | 'method' | 'map' | 'whatif' | 'community';
+// Community reports stay hidden until the publication model (direct vs approval-first) is decided.
+const COMMUNITY_ENABLED = false;
 
 const AppContent: React.FC = () => {
   const { t } = useLanguage();
@@ -52,6 +56,8 @@ const AppContent: React.FC = () => {
     { id: 'daily', label: t.tab_daily },
     { id: 'method', label: t.tab_method },
     { id: 'map', label: t.tab_map },
+    { id: 'whatif', label: t.tab_whatif },
+    ...(COMMUNITY_ENABLED ? [{ id: 'community' as TabKey, label: t.tab_community }] : []),
   ];
 
   // Tab navigation state
@@ -63,7 +69,9 @@ const AppContent: React.FC = () => {
         paramTab === 'graph' ||
         paramTab === 'daily' ||
         paramTab === 'method' ||
-        paramTab === 'map'
+        paramTab === 'map' ||
+        paramTab === 'whatif' ||
+        paramTab === 'community'
       ) {
         return paramTab;
       }
@@ -177,7 +185,7 @@ const AppContent: React.FC = () => {
     <div className="min-h-screen text-stone-900 flex flex-col font-sans transition-colors">
       <div className="ambient-orb" style={{ top: '18%', left: '-6%', width: 340, height: 340, background: 'rgba(251, 191, 36, 0.16)' }} />
       <div className="ambient-orb" style={{ bottom: '8%', right: '-8%', width: 420, height: 420, background: 'rgba(56, 189, 248, 0.13)', animationDelay: '6s' }} />
-      {entered && <Particles3D density={0.5} />}
+      {entered && <Particles3D density={0.8} />}
       {/* 1. Single-Page Printable Report (Visible ONLY in print media) */}
       {predictions && (
         <PrintReport
@@ -280,6 +288,12 @@ const AppContent: React.FC = () => {
 
               {/* Tab 5: Map */}
               {activeTab === 'map' && <MapTab />}
+
+              {/* What-if simulator */}
+              {activeTab === 'whatif' && <WhatIfSimulator />}
+
+              {/* Community reports (gated) */}
+              {COMMUNITY_ENABLED && activeTab === 'community' && <CommunityReports />}
 
               {/* Tab 4: Model & Method */}
               {activeTab === 'method' && (
