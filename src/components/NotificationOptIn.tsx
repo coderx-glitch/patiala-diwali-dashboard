@@ -225,7 +225,7 @@ export const NotificationOptIn: React.FC<NotificationOptInProps> = ({
 
   return (
     <div
-      className={`rounded-xl bg-white border border-stone-200 p-4.5 sm:p-5 shadow-xs transition hover:border-stone-300 ${className}`}
+      className={`rounded-xl bg-white border border-stone-200 border-l-[3px] border-l-orange-400 p-4.5 sm:p-5 shadow-xs transition hover:border-stone-300 ${className}`}
     >
       {/* 2. State: Not subscribed (idle) */}
       {state === 'idle' && (

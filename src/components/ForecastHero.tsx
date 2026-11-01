@@ -176,7 +176,7 @@ export const ForecastHero: React.FC<ForecastHeroProps> = ({ predictionsData, bac
                     ? 'bg-gradient-to-br from-orange-600 via-orange-500 to-amber-500 text-white border-orange-500 day-glow'
                     : isItemDiwali
                     ? 'bg-amber-50/80 border-amber-300 text-stone-800 hover:bg-amber-100/70'
-                    : 'bg-white border-stone-200 text-stone-700 hover:border-stone-300 hover:bg-stone-50'
+                    : 'bg-white border-stone-200 text-stone-700 hover:border-sky-300 hover:bg-sky-50/70 hover:-translate-y-0.5 hover:shadow-md'
                 }`}
               >
                 <span className={`text-xs font-semibold ${isSelected ? 'text-white' : 'text-stone-900'}`}>
@@ -202,7 +202,7 @@ export const ForecastHero: React.FC<ForecastHeroProps> = ({ predictionsData, bac
       </div>
 
       {/* 2. ONE Big Answer for the Selected Day with Dual Sub-Indices & Weather Context */}
-      <div className="rounded-2xl bg-white border border-stone-200 p-6 sm:p-8 shadow-xs">
+      <div className="rounded-2xl bg-white border border-stone-200 p-6 sm:p-8 shadow-xs hero-card">
         {/* Day Context & Badges */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 pb-4 border-b border-stone-100">
           <div>

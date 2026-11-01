@@ -293,7 +293,7 @@ const AppContent: React.FC = () => {
         </main>
 
         {/* Footer */}
-        <footer className="border-t border-stone-200/90 bg-[#faf8f5]/90 py-6 text-xs text-stone-500 transition-colors">
+        <footer className="border-t border-sky-200/60 bg-white/60 backdrop-blur-md py-6 text-xs text-stone-500 transition-colors">
           <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-2">
               <div className="w-2 h-2 rounded-full bg-emerald-600"></div>

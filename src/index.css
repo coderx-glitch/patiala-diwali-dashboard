@@ -93,13 +93,13 @@
 
 /* Interior delight + cinematic depth (visual only) */
 main .space-y-6 > * { animation: fade-up 0.45s ease-out both; }
-main .rounded-xl.bg-white {
+main .rounded-xl.bg-white, main .rounded-2xl.bg-white {
   background: linear-gradient(180deg, #ffffff 0%, #fffdfb 100%);
   border-color: #ecdfd0;
   box-shadow: 0 1px 2px rgba(154, 52, 18, 0.05), 0 14px 34px -18px rgba(146, 96, 60, 0.30);
   transition: box-shadow 0.25s ease, transform 0.25s ease;
 }
-main .rounded-xl.bg-white:hover {
+main .rounded-xl.bg-white:hover, main .rounded-2xl.bg-white:hover {
   transform: translateY(-2px);
   box-shadow: 0 2px 4px rgba(154, 52, 18, 0.06), 0 24px 46px -16px rgba(154, 52, 18, 0.26);
 }
@@ -117,3 +117,11 @@ header.sticky {
 /* Landing sun breathing (visual only) */
 @keyframes sun-pulse { 0%, 100% { transform: scale(1); opacity: 0.95; } 50% { transform: scale(1.08); opacity: 1; } }
 .sun-pulse { animation: sun-pulse 9s ease-in-out infinite; transform-origin: center; }
+
+/* Hero focal card: warm spotlight top-left, cool sky fill bottom-right */
+.hero-card {
+  background:
+    radial-gradient(560px 300px at 10% 0%, rgba(251, 191, 36, 0.15), transparent 62%),
+    radial-gradient(520px 300px at 96% 100%, rgba(125, 180, 220, 0.16), transparent 60%),
+    linear-gradient(180deg, #ffffff 0%, #fffdfb 100%) !important;
+}

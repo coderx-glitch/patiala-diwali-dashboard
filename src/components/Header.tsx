@@ -39,7 +39,7 @@ export const Header: React.FC<HeaderProps> = ({
         {/* Title & Station Badge */}
         <div className="flex flex-col md:flex-row md:items-baseline md:justify-between gap-3">
           <div>
-            <h1 className="font-serif text-2xl sm:text-3.5xl font-bold tracking-tight text-stone-900 leading-tight">
+            <h1 className="font-serif text-2xl sm:text-3.5xl font-bold tracking-tight leading-tight bg-gradient-to-r from-orange-800 via-amber-700 to-orange-800 bg-clip-text text-transparent">
               {t.title}
             </h1>
             <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-stone-600 mt-1">
