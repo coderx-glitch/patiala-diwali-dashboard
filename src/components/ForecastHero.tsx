@@ -173,7 +173,7 @@ export const ForecastHero: React.FC<ForecastHeroProps> = ({ predictionsData, bac
                 onClick={() => setSelectedDate(p.date)}
                 className={`relative flex flex-col items-center justify-center py-2 px-2 rounded-lg border text-center transition cursor-pointer shrink-0 min-w-[65px] sm:min-w-0 ${
                   isSelected
-                    ? 'bg-amber-600 text-white border-amber-600 shadow-xs'
+                    ? 'bg-gradient-to-br from-orange-600 via-orange-500 to-amber-500 text-white border-orange-500 day-glow'
                     : isItemDiwali
                     ? 'bg-amber-50/80 border-amber-300 text-stone-800 hover:bg-amber-100/70'
                     : 'bg-white border-stone-200 text-stone-700 hover:border-stone-300 hover:bg-stone-50'
@@ -262,7 +262,7 @@ export const ForecastHero: React.FC<ForecastHeroProps> = ({ predictionsData, bac
               {t.predicted_pm25}
             </span>
             <div className="flex items-baseline gap-2 mt-1">
-              <span className="font-serif text-6xl sm:text-7xl font-bold text-stone-900 tracking-tight">
+              <span className="font-serif text-6xl sm:text-7xl font-bold text-stone-900 tracking-tight hero-numeral">
                 {selectedItem.pm25_pred.toFixed(1)}
               </span>
               <span className="text-xl sm:text-2xl font-sans text-stone-500 font-normal">

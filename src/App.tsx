@@ -174,7 +174,7 @@ const AppContent: React.FC = () => {
     predictions?.station || backtest?.station || 'Model Town, Patiala - PPCB (site_1437)';
 
   return (
-    <div className="min-h-screen bg-[#faf8f5] text-stone-900 flex flex-col font-sans transition-colors">
+    <div className="min-h-screen text-stone-900 flex flex-col font-sans transition-colors">
       <div className="ambient-orb" style={{ top: '18%', left: '-6%', width: 340, height: 340, background: 'rgba(251, 191, 36, 0.16)' }} />
       <div className="ambient-orb" style={{ bottom: '8%', right: '-8%', width: 420, height: 420, background: 'rgba(56, 189, 248, 0.13)', animationDelay: '6s' }} />
       {entered && <Particles3D density={0.85} />}
@@ -232,7 +232,7 @@ const AppContent: React.FC = () => {
               {/* Tab Navigation Pill Bar */}
               <div className="flex items-center justify-between border-b border-stone-200/80 pb-3">
                 <nav
-                  className="flex items-center gap-1.5 p-1 rounded-xl bg-stone-200/60 border border-stone-200/80 max-w-full overflow-x-auto scrollbar-none"
+                  className="flex items-center gap-1.5 p-1 rounded-xl bg-white/70 backdrop-blur-md border border-sky-200/70 shadow-sm max-w-full overflow-x-auto scrollbar-none"
                   aria-label="Dashboard views"
                 >
                   {tabs.map((tab) => (
@@ -241,8 +241,8 @@ const AppContent: React.FC = () => {
                       onClick={() => setActiveTab(tab.id)}
                       className={`px-4 py-1.5 rounded-lg text-xs font-medium transition cursor-pointer whitespace-nowrap ${
                         activeTab === tab.id
-                          ? 'bg-white text-stone-900 shadow-xs font-semibold'
-                          : 'text-stone-600 hover:text-stone-900 hover:bg-stone-200/40'
+                          ? 'bg-gradient-to-r from-orange-600 to-amber-500 text-white shadow-md font-semibold'
+                          : 'text-stone-600 hover:text-stone-900 hover:bg-white/70'
                       }`}
                     >
                       {tab.label}

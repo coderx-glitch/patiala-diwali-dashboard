@@ -12,6 +12,7 @@
   body {
     background-color: #faf8f5;
     background-image:
+      linear-gradient(180deg, rgba(221, 237, 250, 0.9) 0px, rgba(238, 246, 253, 0.5) 200px, rgba(250, 248, 245, 0) 430px),
       radial-gradient(1200px 500px at 85% -8%, rgba(194, 65, 12, 0.055), transparent 60%),
       radial-gradient(900px 420px at 8% -4%, rgba(217, 119, 6, 0.05), transparent 60%),
       radial-gradient(700px 700px at 50% 115%, rgba(146, 64, 14, 0.04), transparent 60%);
@@ -52,6 +53,7 @@
   }
   body {
     background-color: #ffffff !important;
+    background-image: none !important;
     color: #111827 !important;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
@@ -89,11 +91,28 @@
 @keyframes orb-float { 0% { transform: translate(0,0); } 50% { transform: translate(3%, -4%); } 100% { transform: translate(0,0); } }
 .ambient-orb { position: fixed; border-radius: 9999px; pointer-events: none; z-index: 0; filter: blur(70px); animation: orb-float 26s ease-in-out infinite; }
 
-/* Interior delight (visual only) */
+/* Interior delight + cinematic depth (visual only) */
 main .space-y-6 > * { animation: fade-up 0.45s ease-out both; }
-main .rounded-xl.bg-white { transition: box-shadow 0.2s ease; }
-main .rounded-xl.bg-white:hover { box-shadow: 0 8px 22px -10px rgba(154, 52, 18, 0.14); }
-header.sticky { box-shadow: 0 1px 10px -4px rgba(28, 25, 23, 0.10); }
+main .rounded-xl.bg-white {
+  background: linear-gradient(180deg, #ffffff 0%, #fffdfb 100%);
+  border-color: #ecdfd0;
+  box-shadow: 0 1px 2px rgba(154, 52, 18, 0.05), 0 14px 34px -18px rgba(146, 96, 60, 0.30);
+  transition: box-shadow 0.25s ease, transform 0.25s ease;
+}
+main .rounded-xl.bg-white:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 4px rgba(154, 52, 18, 0.06), 0 24px 46px -16px rgba(154, 52, 18, 0.26);
+}
+header.sticky {
+  background: linear-gradient(180deg, rgba(224, 239, 251, 0.94) 0%, rgba(250, 248, 245, 0.86) 100%) !important;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 1px 12px -4px rgba(28, 25, 23, 0.12);
+}
+/* hero numeral spotlight */
+.hero-numeral { text-shadow: 0 3px 30px rgba(251, 191, 36, 0.42), 0 1px 2px rgba(154, 52, 18, 0.16); }
+/* selected day cinematic glow */
+.day-glow { box-shadow: 0 8px 20px -6px rgba(234, 88, 12, 0.55), 0 2px 6px -2px rgba(154, 52, 18, 0.35) !important; }
 
 /* Landing sun breathing (visual only) */
 @keyframes sun-pulse { 0%, 100% { transform: scale(1); opacity: 0.95; } 50% { transform: scale(1.08); opacity: 1; } }
