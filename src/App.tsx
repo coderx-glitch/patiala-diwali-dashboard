@@ -9,6 +9,7 @@ import { MethodologySection } from './components/MethodologySection';
 import { MapTab } from './components/MapTab';
 import { WhatIfSimulator } from './components/WhatIfSimulator';
 import { CommunityReports } from './components/CommunityReports';
+import { ModerationView } from './components/ModerationView';
 import { DiwaliSpecial } from './components/DiwaliSpecial';
 import { NotificationOptIn } from './components/NotificationOptIn';
 import { FileUploaderModal } from './components/FileUploaderModal';
@@ -95,6 +96,14 @@ const AppContent: React.FC = () => {
     }
     return false;
   });
+  const [isModerateHash, setIsModerateHash] = useState<boolean>(() => (
+    typeof window !== 'undefined' && window.location.hash === '#moderate'
+  ));
+  useEffect(() => {
+    const onHash = () => setIsModerateHash(window.location.hash === '#moderate');
+    window.addEventListener('hashchange', onHash);
+    return () => window.removeEventListener('hashchange', onHash);
+  }, []);
   const [isUploadOpen, setIsUploadOpen] = useState<boolean>(() => {
     if (typeof window !== 'undefined') {
       return new URLSearchParams(window.location.search).get('modal') === 'upload';
@@ -196,7 +205,11 @@ const AppContent: React.FC = () => {
       )}
 
       {/* 2. Interactive App View (Hidden during print) */}
-      {!entered ? (
+      {isModerateHash ? (
+        <div className="print:hidden flex flex-col min-h-screen">
+          <ModerationView />
+        </div>
+      ) : !entered ? (
         <LandingPage onEnter={handleEnter} />
       ) : (
       <div className="print:hidden flex flex-col min-h-screen">

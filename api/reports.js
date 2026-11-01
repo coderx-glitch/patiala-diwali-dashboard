@@ -72,13 +72,19 @@ export function makeHandler(store) {
     };
 
     if (req.method === 'GET') {
+      // Moderator view: a valid bearer token sees every report with its status.
+      // The token is compared here only; it is never stored client-side or shipped.
+      const modTok = process.env.REPORTS_MOD_TOKEN;
+      const isMod = !!modTok && req.headers.authorization === `Bearer ${modTok}`;
       const fresh = await purge();
       // approval mode exposes only approved reports publicly
-      const visible = COMMUNITY_MODE === 'approval' ? fresh.filter((r) => r.status === 'approved') : fresh;
+      const visible = isMod ? fresh : (COMMUNITY_MODE === 'approval' ? fresh.filter((r) => r.status === 'approved') : fresh);
       res.setHeader('Cache-Control', 'no-store');
       return res.status(200).json({
         scope: 'Unverified community reports near Patiala. Anonymous, auto-expire after 72 hours. Not authority-verified incidents.',
         mode: COMMUNITY_MODE,
+        moderator: isMod,
+        pendingCount: isMod ? fresh.filter((r) => r.status === 'pending').length : undefined,
         count: visible.length,
         reports: visible.map(publicView),
       });
