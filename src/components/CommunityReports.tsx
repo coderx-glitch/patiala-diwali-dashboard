@@ -44,6 +44,7 @@ function km(a: Report, b: Report) {
 export const CommunityReports: React.FC = () => {
   const [reports, setReports] = useState<Report[] | null>(null);
   const [loadErr, setLoadErr] = useState<string | null>(null);
+  const [mode, setMode] = useState<'approval' | 'direct' | null>(null);
   const [type, setType] = useState<CatId>('firecracker');
   const [pos, setPos] = useState<[number, number] | null>(null);
   const [note, setNote] = useState('');
@@ -55,7 +56,7 @@ export const CommunityReports: React.FC = () => {
   const markerRef = useRef<maplibregl.Marker | null>(null);
 
   const refresh = () => {
-    fetch('/api/reports').then((r) => r.json()).then((d) => setReports(d.reports || [])).catch(() => setLoadErr('Reports could not be loaded (the reports service runs on the live site).'));
+    fetch('/api/reports').then((r) => r.json()).then((d) => { setReports(d.reports || []); if (d.mode) setMode(d.mode as 'approval' | 'direct'); }).catch(() => setLoadErr('Reports could not be loaded (the reports service runs on the live site).'));
   };
   useEffect(refresh, []);
 
@@ -128,8 +129,8 @@ export const CommunityReports: React.FC = () => {
       const d = await r.json();
       if (!r.ok) throw new Error(d.error || 'submit failed');
       setMsg(d.queued
-        ? 'Report submitted. It will appear publicly after a moderator approves it. Anonymous, auto-expires in 72 hours.'
-        : 'Report submitted. It is public, anonymous and auto-expires in 72 hours.');
+        ? 'Report submitted. It will appear publicly after review. No account was needed; it auto-expires in 72 hours.'
+        : 'Report submitted. It is public now. No account was needed; it auto-expires in 72 hours.');
       setNote(''); setPhoto(null); setPos(null);
       refresh();
     } catch (e: any) { setMsg(`Submit failed: ${e.message}`); }
@@ -149,8 +150,9 @@ export const CommunityReports: React.FC = () => {
         <div>
           <h2 className="font-serif font-bold text-stone-900 text-base">Community Pollution Reports - Patiala</h2>
           <p className="text-[11px] text-stone-500 mt-0.5">
-            Report firecrackers, open/garbage burning, smoke or dust near you. Anonymous and public: no name, no phone, location rounded to ~110 m, photo metadata removed on your device. Reports auto-expire after 72 hours.
+            Report firecrackers, open/garbage burning, smoke or dust near you. No account, name or phone number is collected. Location is rounded to ~110 m and photo file metadata is removed on your device before upload. Photos and notes can still identify people - avoid faces, number plates and personal details. Reports auto-expire after 72 hours.
           </p>
+          {mode === 'approval' && <p className="text-[11px] text-amber-800 mt-1">Reports are reviewed before they appear publicly.</p>}
         </div>
 
         <div className="grid md:grid-cols-2 gap-3">
@@ -189,7 +191,7 @@ export const CommunityReports: React.FC = () => {
           </div>
           <div>
             <div ref={mapEl} className="w-full h-[300px] rounded-lg border border-stone-200 overflow-hidden" />
-            <p className="text-[10px] text-stone-400 mt-1">Live incident map: anonymous community reports only. Dots show rounded locations, never exact addresses.</p>
+            <p className="text-[10px] text-stone-400 mt-1">Live incident map: unverified community reports only. Dots show rounded locations, never exact addresses.</p>
           </div>
         </div>
       </div>

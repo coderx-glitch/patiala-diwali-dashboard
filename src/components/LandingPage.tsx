@@ -2,6 +2,7 @@ import React from 'react';
 import { ArrowRight, CloudSun, Wind, LineChart } from 'lucide-react';
 import { useLanguage } from '../utils/i18n';
 import Particles3D from './Particles3D';
+import Cityscape3D from './Cityscape3D';
 
 interface Props { onEnter: () => void }
 
@@ -59,6 +60,14 @@ const LandingPage: React.FC<Props> = ({ onEnter }) => {
         </button>
       </div>
 
+      {/* 3D Patiala skyline: real OSM building footprints, stylized heights, continuous slow rotation */}
+      <div className="relative z-[5] w-full h-[280px] sm:h-[380px] mt-4 pointer-events-none overflow-hidden" aria-hidden="true">
+        <div className="absolute inset-x-0 top-0 h-28 z-10" style={{ background: 'linear-gradient(to bottom, rgba(254,243,224,0.98), rgba(254,243,224,0))' }} />
+        <Cityscape3D />
+        <div className="absolute bottom-2 left-1/2 -translate-x-1/2 z-10 max-w-[92%] text-center rounded-xl bg-white/85 border border-stone-200 px-3 py-1 text-[10px] text-stone-500 font-mono shadow-xs">
+          Real Patiala building footprints (OpenStreetMap) - stylized 3D heights, not surveyed · © OpenStreetMap contributors
+        </div>
+      </div>
       <div className="relative z-10 pb-5 text-center text-[11px] text-stone-500 font-mono">{t.landing_footer}</div>
     </div>
   );

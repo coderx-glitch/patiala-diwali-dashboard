@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 type Report = {
   id: string;
@@ -14,6 +14,24 @@ type Report = {
 // Owner-only moderation view at #moderate (not linked in the UI).
 // The moderation token is entered per session from the owner's password manager
 // and held only in memory. It is never stored, logged, or placed in the URL.
+
+// Pending photos are gated server-side; <img> cannot send the moderation key,
+// so photos load through fetch with the Authorization header into an object URL.
+function ModPhoto({ id, token }: { id: string; token: string }) {
+  const [src, setSrc] = useState<string | null>(null);
+  useEffect(() => {
+    let url: string | null = null;
+    let dead = false;
+    fetch(`/api/report-photo?id=${id}`, { headers: { Authorization: `Bearer ${token}` } })
+      .then((r) => (r.ok ? r.blob() : null))
+      .then((b) => { if (b && !dead) { url = URL.createObjectURL(b); setSrc(url); } })
+      .catch(() => {});
+    return () => { dead = true; if (url) URL.revokeObjectURL(url); };
+  }, [id, token]);
+  if (!src) return null;
+  return <img src={src} alt="report" className="rounded-lg max-h-40 object-cover" />;
+}
+
 export function ModerationView() {
   const [token, setToken] = useState('');
   const [authed, setAuthed] = useState(false);
@@ -109,7 +127,7 @@ export function ModerationView() {
               </div>
               <p className="text-[11px] text-stone-500">{new Date(r.ts).toLocaleString('en-IN')} - {r.lat.toFixed(3)}, {r.lon.toFixed(3)}</p>
               {r.note && <p className="text-xs text-stone-700">{r.note}</p>}
-              {r.photoUrl && <img src={r.photoUrl} alt="report" className="rounded-lg max-h-40 object-cover" />}
+              {r.photoUrl && <ModPhoto id={r.id} token={token} />}
               {r.status === 'pending' && (
                 <div className="flex gap-2">
                   <button disabled={busy} onClick={() => act(r.id, 'approve')} className="px-3 py-1.5 rounded-lg bg-emerald-700 text-white text-xs font-semibold disabled:opacity-50">Approve</button>
