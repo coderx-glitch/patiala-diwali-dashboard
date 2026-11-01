@@ -84,7 +84,7 @@ export const WhatIfSimulator: React.FC = () => {
                 </button>
               ))}
             </div>
-            <div className="text-[10px] text-stone-400">Nov rain is rare in training data (7 days in 4 years) - least reliable scenario.</div>
+            <div className="text-[10px] text-stone-400">November rain is rare in the training data (only 7 rainy November days in 4 years) - least reliable scenario.</div>
           </div>
           <div className="rounded-lg border border-stone-200 bg-stone-50 p-3 space-y-1.5">
             <div className="flex items-center gap-1.5 text-[11px] font-semibold text-stone-700"><Sparkles className="w-3.5 h-3.5" /> Festival effect</div>
